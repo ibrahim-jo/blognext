@@ -157,3 +157,30 @@ throw error
       
     }
   }
+  type ChangeRole=(id:string,isAdmin:string)=>Promise<'success'|'Wrong'>
+  
+  export  const changeRole:ChangeRole=async(id,isAdmin)=>{
+    try {
+      if(isAdmin==='admin'){
+       
+          const u1=await Prisma.user.update({where:{id:id},data:{isAdmin:true}})
+          console.log('Admin',u1)
+          revalidatePath('/admin')
+
+      }
+      else{
+
+        console.log(isAdmin)
+        await Prisma.user.update({where:{id:id},data:{isAdmin:false}}) 
+        revalidatePath('/admin')
+
+      }
+        
+    } catch (error) {
+      if(error instanceof Error)
+        return 'Wrong'
+      
+    }
+    return 'success'
+
+  }
