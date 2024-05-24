@@ -31,7 +31,7 @@ const PopUp = ({ open, onclose, id }: Props) => {
           <h1 className="text-black">Edit Role</h1>
           <div className="flex flex-row ">
  
-          <FormPupUp />
+          <FormPupUp  id={id} onclose={onclose}/>
         
           </div>
         </div>
